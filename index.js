@@ -5,8 +5,19 @@ const express = require('express')
 const Hook = new webhook.Webhook(Json.token);
 const app = express()
 const port = 3000
- function exitserver() {
-
+function System() {
+ if (process.platform === "win32") {
+  return os.version() + ": " + os.arch()
+ }
+ if (process.platform === "android") {
+  return 'Android' + ": " + os.arch()
+ }
+ if (process.platform === "linux") {
+  return process.platform + ": " + os.arch()
+ }
+ else {
+  return "Система не определена"
+ }
 }
 app.use(express.static('static'));
 app.get('/', (req, res) => {
@@ -20,7 +31,7 @@ if (process.argv[2] == 'start') {
   .setName('Бот сервера')
   .setTitle('Сервер запущен!')
   .setColor('#0bdf4e')
-  .addField("Операционка:", os.version() + ": " + os.arch(), false)
+  .addField("Операционка:", System(), false)
   .addField("Скоко памят:", (os.freemem()  / 1024 / 1024/ 1024).toFixed(2)  + "/" +  (os.totalmem() / 1024 / 1024/ 1024).toFixed(2) + " GB", false)
   .addField("Ебучий движок:", "Node " + process.version, false)
   .addField("Ссылка:", Json.url, false)
