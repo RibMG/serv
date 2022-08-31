@@ -47,7 +47,7 @@ var stdin = process.stdin;
 stdin.setRawMode( true );
 stdin.resume();
 stdin.setEncoding( 'utf8' );
-stdin.on( 'data', function( key ){
+stdin.on( 'data', function( key ) {
   if ( key === 'e' ) {
     const msg = new webhook.MessageBuilder()
     .setName("Бот сервера")
@@ -59,4 +59,4 @@ stdin.on( 'data', function( key ){
   {
     process.exit();
   }
-});
+})
